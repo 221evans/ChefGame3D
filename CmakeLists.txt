@@ -1,0 +1,57 @@
+cmake_minimum_required(VERSION 3.21)
+project(ChefGame3D)
+
+# Use modern C++
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Set default build type if not specified
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type" FORCE)
+endif()
+
+# Fetch Raylib from GitHub
+include(FetchContent)
+FetchContent_Declare(
+    raylib
+    GIT_REPOSITORY https://github.com/raysan5/raylib.git
+    GIT_TAG 5.5
+)
+FetchContent_MakeAvailable(raylib)
+
+# Define your executable
+add_executable(${PROJECT_NAME}
+    src/main.cpp
+)
+
+# Link Raylib
+target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
+
+# Ensure Raylib include dirs are visible
+target_include_directories(${PROJECT_NAME} PRIVATE
+    ${raylib_SOURCE_DIR}/src
+    ${raylib_BINARY_DIR}/src
+)
+
+# macOS frameworks
+if(APPLE)
+    target_link_libraries(${PROJECT_NAME} PRIVATE
+        "-framework IOKit"
+        "-framework Cocoa"
+        "-framework OpenGL"
+        "-framework CoreVideo"
+    )
+endif()
+
+# Copy Assets folder (optional)
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/Assets
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>/Assets
+)
+
+# Output directory
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+)
+
