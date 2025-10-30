@@ -1,5 +1,5 @@
 #include "raylib.h"
-
+#include "Core/Player.h"
 int main(){
     int windowWidth = 800;
     int windowHeight = 600;
@@ -8,6 +8,7 @@ int main(){
 
     //Create 3D Camera
     Camera3D camera;
+    Player player;
     camera.position = (Vector3){0.0f,10.0f,10.0f};
     camera.target = (Vector3){0.0f,0.0f,0.0f};
     camera.up = (Vector3){0.0f,1.0f,0.0f};
@@ -21,7 +22,7 @@ int main(){
         ClearBackground(RAYWHITE);
         BeginMode3D(camera);
         DrawGrid(20,1);
-        DrawCube(position, 2.0f, 2.0f, 2.0f, RED);
+        player.Draw();
         EndMode3D();
         EndDrawing();
 
