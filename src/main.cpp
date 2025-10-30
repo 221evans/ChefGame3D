@@ -18,15 +18,18 @@ int main(){
     Vector3 position = {0.0f,0.0f,0.0f};
 
     while (!WindowShouldClose()) {
+        float deltaTime = GetFrameTime();
         BeginDrawing();
         ClearBackground(RAYWHITE);
         BeginMode3D(camera);
+        player.Update(deltaTime);
         DrawGrid(20,1);
+      
         player.Draw();
         EndMode3D();
         EndDrawing();
 
     
-    }
+    };
     return 0;
 };
