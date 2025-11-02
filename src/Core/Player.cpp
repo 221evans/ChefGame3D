@@ -2,12 +2,14 @@
 #include "raylib.h"
 
 Player::Player() : posX(0),posY(0),posZ(0), rotationAngle(-180.0f){
-    positon = {posX,posY,posZ};
+    position = {posX,posY,posZ};
     idleModel = LoadModel("Assets/Player/Dummy.glb");
+    baseBox = GetModelBoundingBox(idleModel);
 }
 
 void Player::Draw(){
-   DrawModelEx(idleModel, positon,(Vector3){0,1,0}, rotationAngle,(Vector3){1,1,1}, WHITE); 
+    DrawModelEx(idleModel, position,(Vector3){0,1,0}, rotationAngle,(Vector3){1,1,1}, WHITE);
+    DrawBoundingBox(worldBox, RED);
 }
 
 void Player::Update(float deltaTime){
@@ -40,8 +42,22 @@ void Player::Update(float deltaTime){
         }
     }
 
-   positon = {posX,posY,posZ};
+   position = {posX,posY,posZ};
 
+    UpdateBoundingBox();
+}
+
+void Player::UpdateBoundingBox() {
+
+    worldBox = baseBox;
+
+    worldBox.min.x += position.x;
+    worldBox.min.y += position.y;
+    worldBox.min.z += position.z;
+
+    worldBox.max.x += position.x;
+    worldBox.max.y += position.y;
+    worldBox.max.z += position.z;
 
 }
 

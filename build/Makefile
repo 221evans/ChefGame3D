@@ -246,6 +246,54 @@ update_mappings/fast:
 	$(MAKE) $(MAKESILENT) -f _deps/raylib-build/raylib/external/glfw/src/CMakeFiles/update_mappings.dir/build.make _deps/raylib-build/raylib/external/glfw/src/CMakeFiles/update_mappings.dir/build
 .PHONY : update_mappings/fast
 
+src/Core/Crates/SteakCrate.o: src/Core/Crates/SteakCrate.cpp.o
+.PHONY : src/Core/Crates/SteakCrate.o
+
+# target to build an object file
+src/Core/Crates/SteakCrate.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChefGame3D.dir/build.make CMakeFiles/ChefGame3D.dir/src/Core/Crates/SteakCrate.cpp.o
+.PHONY : src/Core/Crates/SteakCrate.cpp.o
+
+src/Core/Crates/SteakCrate.i: src/Core/Crates/SteakCrate.cpp.i
+.PHONY : src/Core/Crates/SteakCrate.i
+
+# target to preprocess a source file
+src/Core/Crates/SteakCrate.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChefGame3D.dir/build.make CMakeFiles/ChefGame3D.dir/src/Core/Crates/SteakCrate.cpp.i
+.PHONY : src/Core/Crates/SteakCrate.cpp.i
+
+src/Core/Crates/SteakCrate.s: src/Core/Crates/SteakCrate.cpp.s
+.PHONY : src/Core/Crates/SteakCrate.s
+
+# target to generate assembly for a file
+src/Core/Crates/SteakCrate.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChefGame3D.dir/build.make CMakeFiles/ChefGame3D.dir/src/Core/Crates/SteakCrate.cpp.s
+.PHONY : src/Core/Crates/SteakCrate.cpp.s
+
+src/Core/Player.o: src/Core/Player.cpp.o
+.PHONY : src/Core/Player.o
+
+# target to build an object file
+src/Core/Player.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChefGame3D.dir/build.make CMakeFiles/ChefGame3D.dir/src/Core/Player.cpp.o
+.PHONY : src/Core/Player.cpp.o
+
+src/Core/Player.i: src/Core/Player.cpp.i
+.PHONY : src/Core/Player.i
+
+# target to preprocess a source file
+src/Core/Player.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChefGame3D.dir/build.make CMakeFiles/ChefGame3D.dir/src/Core/Player.cpp.i
+.PHONY : src/Core/Player.cpp.i
+
+src/Core/Player.s: src/Core/Player.cpp.s
+.PHONY : src/Core/Player.s
+
+# target to generate assembly for a file
+src/Core/Player.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChefGame3D.dir/build.make CMakeFiles/ChefGame3D.dir/src/Core/Player.cpp.s
+.PHONY : src/Core/Player.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -289,6 +337,12 @@ help:
 	@echo "... ChefGame3D"
 	@echo "... glfw"
 	@echo "... raylib"
+	@echo "... src/Core/Crates/SteakCrate.o"
+	@echo "... src/Core/Crates/SteakCrate.i"
+	@echo "... src/Core/Crates/SteakCrate.s"
+	@echo "... src/Core/Player.o"
+	@echo "... src/Core/Player.i"
+	@echo "... src/Core/Player.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
