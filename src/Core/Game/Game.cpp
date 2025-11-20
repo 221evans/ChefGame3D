@@ -40,6 +40,10 @@ void Game::Update(float deltaTime) {
         std::cout << "Colliding with stove" << std::endl;
     }
 
+    if (CheckCollisionBoxes(steak.worldBox, player.worldBox) && !steak.isHeld && IsKeyDown(KEY_E)) {
+        steak.isHeld = true;
+    }
+
     if (IsKeyDown(KEY_F)) {
         steak.isHeld = false;
     }
