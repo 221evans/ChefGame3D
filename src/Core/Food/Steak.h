@@ -14,13 +14,17 @@ public:
     float posZ;
 
     bool isHeld;
+    bool isSpawned;
 
     Model rawModel;
     Model currentModel;
     Vector3 position;
+    BoundingBox baseBox;
+    BoundingBox worldBox;
 
     void Draw();
     void Update(float deltaTime);
+    void UpdateWorldBox();
     ~Steak();
 };
 

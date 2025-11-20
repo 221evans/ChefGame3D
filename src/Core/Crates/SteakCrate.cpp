@@ -1,7 +1,7 @@
 #include "SteakCrate.h"
 
 
-SteakCrate::SteakCrate() : posX(0), posY(0), posZ(0){
+SteakCrate::SteakCrate() : posX(0), posY(0), posZ(0) {
     position = {posX, posY,posZ};
     crateModel = LoadModel("Assets/Crates/crate_steak.obj");
     baseBox = GetModelBoundingBox(crateModel);
@@ -13,10 +13,9 @@ void SteakCrate::Draw(){
 }
 
 void SteakCrate::Update() {
-
     position = {posX, posY,posZ};
 }
 
-SteakCrate::~SteakCrate(){
-
+SteakCrate::~SteakCrate() {
+    UnloadModel(crateModel);
 }

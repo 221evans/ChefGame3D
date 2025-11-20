@@ -2,9 +2,7 @@
 #include <ostream>
 
 #include "raylib.h"
-#include "Core/Player.h"
-#include "Core/Crates/SteakCrate.h"
-#include "Core/Food/Steak.h"
+#include "Core/Game/Game.h"
 
 int main(){
     int windowWidth = 800;
@@ -14,9 +12,7 @@ int main(){
 
     //Create 3D Camera
     Camera3D camera;
-    Player player;
-    SteakCrate steakCrate;
-    Steak steak;
+    Game game;
 
     camera.position = (Vector3){0.0f,10.0f,10.0f};
     camera.target = (Vector3){0.0f,0.0f,0.0f};
@@ -29,25 +25,14 @@ int main(){
         BeginDrawing();
         ClearBackground(RAYWHITE);
         BeginMode3D(camera);
-        player.Update(deltaTime);
+
+        // Update Function
+        game.Update(deltaTime);
         DrawGrid(20,1);
-        player.Draw();
-        steakCrate.Draw();
 
-        if (CheckCollisionBoxes(player.worldBox, steakCrate.baseBox) && IsKeyPressed(KEY_E)) {
-            steak.isHeld = true;
-        }
-        else if (IsKeyPressed(KEY_F)) {
-            steak.isHeld = false;
-        }
+        // Draw Function
+        game.Draw();
 
-        if (steak.isHeld) {
-            steak.Update(deltaTime);
-            steak.Draw();
-            steak.posX = player.posX + 1;
-            steak.posY = player.posY + 1;
-            steak.posZ = player.posZ;
-        }
         EndMode3D();
         EndDrawing();
 

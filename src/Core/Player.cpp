@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "raylib.h"
 
-Player::Player() : posX(0),posY(0),posZ(0), rotationAngle(-180.0f){
+Player::Player() : posX(0),posY(0),posZ(0), rotationAngle(-180.0f), speed(5.0f){
     position = {posX,posY,posZ};
     idleModel = LoadModel("Assets/Player/Dummy.glb");
     baseBox = GetModelBoundingBox(idleModel);
@@ -14,28 +14,28 @@ void Player::Draw(){
 
 void Player::Update(float deltaTime){
     if (IsKeyDown(KEY_A)) {
-        posX -= 1.0f * deltaTime;
+        posX -= speed * deltaTime;
 
         if (rotationAngle != -90.0f) {
             rotationAngle = -90.0f;
         }
     }
     else if (IsKeyDown(KEY_D)){
-        posX += 1.0f * deltaTime;
+        posX += speed * deltaTime;
 
         if (rotationAngle != -275.0f) {
             rotationAngle = -275.0f;
         }
     }
     else if (IsKeyDown(KEY_W)){
-        posZ -= 1.0f * deltaTime;
+        posZ -= speed * deltaTime;
 
         if(rotationAngle != -180.0f){
             rotationAngle = -180.0f;
         }
     }
     else if (IsKeyDown(KEY_S)){
-        posZ += 1.0f * deltaTime;
+        posZ += speed * deltaTime;
 
         if(rotationAngle != 0){
             rotationAngle = 0;
@@ -58,7 +58,6 @@ void Player::UpdateBoundingBox() {
     worldBox.max.x += position.x;
     worldBox.max.y += position.y;
     worldBox.max.z += position.z;
-
 }
 
 

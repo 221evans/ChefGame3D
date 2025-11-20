@@ -11,6 +11,7 @@ public:
     float posY;
     float posZ;
     float rotationAngle;
+    float speed;
 
     Vector3 position;
     Model idleModel;
