@@ -25,12 +25,6 @@ void Stove::Update() {
 
 void Stove::UpdateWorldBox() {
 
-    TraceLog(LOG_INFO, "Stove world box updated to: %.2f %.2f %.2f",
-    worldBox.min.x + position.x,
-    worldBox.min.y + position.y,
-    worldBox.min.z + position.z
-);
-
     worldBox = baseBox;
 
     worldBox.min.x += position.x;

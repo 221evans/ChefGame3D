@@ -5,8 +5,10 @@
 #ifndef CHEFGAME3D_STOVE_H
 #define CHEFGAME3D_STOVE_H
 #include "Raylib.h"
+#include <iomanip>
 
 class Stove {
+
 public:
     Stove();
     float posX;

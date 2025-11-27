@@ -15,9 +15,20 @@ public:
 
     bool isHeld;
     bool isSpawned;
+    bool isPlaced;
+
+    bool isCooking;
+    bool isCooked;
+    bool isBurnt;
+
+    float cookingTimer;
+    float timeToCook;
+    float timeToBurn;
 
     Model rawModel;
     Model currentModel;
+    Model cookedModel;
+    Model burntModel;
     Vector3 position;
     BoundingBox baseBox;
     BoundingBox worldBox;
@@ -25,6 +36,7 @@ public:
     void Draw();
     void Update(float deltaTime);
     void UpdateWorldBox();
+    void UpdateCooking(float deltaTime);
     ~Steak();
 };
 

@@ -34,18 +34,28 @@ void Game::Update(float deltaTime) {
     if (CheckCollisionBoxes(player.worldBox, steakCrate.worldBox) && IsKeyDown(KEY_E)) {
         steak.isSpawned = true;
         steak.isHeld = true;
-    }
-
-    if (CheckCollisionBoxes(player.worldBox, stove.worldBox)) {
-        std::cout << "Colliding with stove" << std::endl;
+        steak.isPlaced = false;
+        steak.isCooking = false;
     }
 
     if (CheckCollisionBoxes(steak.worldBox, player.worldBox) && !steak.isHeld && IsKeyDown(KEY_E)) {
         steak.isHeld = true;
+        steak.isPlaced = false;
+        steak.isCooking = false;
     }
 
     if (IsKeyDown(KEY_F)) {
         steak.isHeld = false;
+    }
+
+    if (CheckCollisionBoxes(player.worldBox, stove.worldBox) && steak.isHeld && IsKeyDown(KEY_Q)) {
+        steak.posX = stove.posX;
+        steak.posY = stove.posY + 1.2f;
+        steak.posZ = stove.posZ;
+
+        steak.isHeld = false;
+        steak.isPlaced = true;
+        steak.isCooking = true;
     }
 
 }
