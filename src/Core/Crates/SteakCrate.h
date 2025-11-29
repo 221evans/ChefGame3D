@@ -1,23 +1,16 @@
-#include "raylib.h"
+#pragma once
+#include "../Crates/Crate.h"
 
-class SteakCrate {
+
+class SteakCrate : public  Crate {
 
 public:
 
 	SteakCrate();
 
-	float posX;
-	float posY;
-	float posZ;
-    
-    Model crateModel;
-    Vector3 position;
-	BoundingBox baseBox;
-	BoundingBox worldBox;
+	void Draw() override;
+	void Update() override;
 
-	void Draw();
-	void Update();
-	void UpdateBoundingBox();
 
-	~SteakCrate();
+	~SteakCrate() override;
 };

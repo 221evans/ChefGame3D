@@ -3,7 +3,6 @@
 //
 
 #include "Steak.h"
-
 #include <iostream>
 #include <ostream>
 

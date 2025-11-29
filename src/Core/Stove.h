@@ -4,7 +4,7 @@
 
 #ifndef CHEFGAME3D_STOVE_H
 #define CHEFGAME3D_STOVE_H
-#include "Raylib.h"
+#include "raylib.h"
 #include <iomanip>
 
 class Stove {

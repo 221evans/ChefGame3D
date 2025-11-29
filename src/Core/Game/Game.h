@@ -4,11 +4,13 @@
 
 #ifndef CHEFGAME3D_GAME_H
 #define CHEFGAME3D_GAME_H
-#include "Raylib.h"
+
 #include "../Food/Steak.h"
+#include "../Crates/Crate.h"
 #include "../Crates/SteakCrate.h"
 #include "../Player.h"
 #include "../Stove.h"
+
 class Game {
 public:
     SteakCrate steakCrate;
