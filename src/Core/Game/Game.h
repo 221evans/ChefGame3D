@@ -6,20 +6,31 @@
 #define CHEFGAME3D_GAME_H
 
 #include "../Food/Steak.h"
-#include "../Crates/Crate.h"
+#include "../Food/Carrot.h"
+#include "../ServingStation.h"
+#include "../Crates/CarrotCrate.h"
 #include "../Crates/SteakCrate.h"
 #include "../Player.h"
 #include "../Stove.h"
+#include <vector>
 
 class Game {
 public:
     SteakCrate steakCrate;
-    Steak steak;
+    CarrotCrate carrotCrate;
+    ServingStation servingStation;
+    std::vector<Steak*> steaks;
+    std::vector<Carrot*> carrots;
+    Steak *heldSteak;
+    Carrot *heldCarrot;
     Player player;
     Stove stove;
     Game();
     void Draw();
     void Update(float deltaTime);
+    void HandleSteakUpdate(float deltaTime);
+    void HandleCarrotUpdate(float deltaTime);
+    void HandleServingStationUpdate(float deltaTime);
     ~Game();
 };
 

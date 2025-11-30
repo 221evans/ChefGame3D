@@ -22,12 +22,14 @@ int main(){
 
     while (!WindowShouldClose()) {
         float deltaTime = GetFrameTime();
+        // Update Function
+        game.Update(deltaTime);
         BeginDrawing();
         ClearBackground(RAYWHITE);
         BeginMode3D(camera);
 
-        // Update Function
-        game.Update(deltaTime);
+
+
         DrawGrid(20,1);
 
         // Draw Function

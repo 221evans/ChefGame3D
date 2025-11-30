@@ -32,6 +32,14 @@ add_executable(${PROJECT_NAME}
         src/Core/Stove.h
         src/Core/Crates/Crate.cpp
         src/Core/Crates/Crate.h
+        src/Core/Crates/CarrotCrate.cpp
+        src/Core/Crates/CarrotCrate.h
+        src/Core/Food/Food.cpp
+        src/Core/Food/Food.h
+        src/Core/Food/Carrot.cpp
+        src/Core/Food/Carrot.h
+        src/Core/ServingStation.cpp
+        src/Core/ServingStation.h
 )
 
 # Link Raylib

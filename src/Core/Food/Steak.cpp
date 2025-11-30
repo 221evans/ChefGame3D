@@ -6,16 +6,21 @@
 #include <iostream>
 #include <ostream>
 
-Steak::Steak() : posX(0), posY(0), posZ(2),isHeld(false), isSpawned(false),
-                 isPlaced(false), isCooking(false), isCooked(false), isBurnt(false),
+Steak::Steak() : isCooking(false),
+                 isCooked(false),isBurnt(false),
                  cookingTimer(0.0f), timeToCook(5.0f), timeToBurn(8.0f) {
 
+    posX = 0;
+    posY = 0;
+    posZ = 0;
+    position = {posX, posY,posZ};
     rawModel = LoadModel("Assets/Crates/food_ingredient_steak.obj");
     cookedModel = LoadModel("Assets/Crates/cookedSteak.glb");
     burntModel = LoadModel("Assets/Crates/burntSteak.glb");
     currentModel = rawModel;
-    baseBox = GetModelBoundingBox(rawModel);
-    
+    baseBox = GetModelBoundingBox(currentModel);
+
+
 }
 
 void Steak::Draw() {
@@ -24,6 +29,9 @@ void Steak::Draw() {
 }
 
 void Steak::Update(float deltaTime) {
+
+    UpdateWorldBox();
+
     position = {posX, posY,posZ};
 
     // Apply Gravity
@@ -44,20 +52,6 @@ void Steak::Update(float deltaTime) {
     if (isBurnt) {
         currentModel = burntModel;
     }
-
-    UpdateWorldBox();
-}
-
-void Steak::UpdateWorldBox() {
-    worldBox = baseBox;
-
-    worldBox.min.x += position.x;
-    worldBox.min.y += position.y;
-    worldBox.min.z += position.z;
-
-    worldBox.max.x += position.x;
-    worldBox.max.y += position.y;
-    worldBox.max.z += position.z;
 }
 
 void Steak::UpdateCooking(float deltaTime) {
@@ -72,6 +66,18 @@ void Steak::UpdateCooking(float deltaTime) {
         isBurnt = true;
         std::cout << "Burnt Steak" << std::endl;
     }
+}
+
+void Steak::UpdateWorldBox() {
+    worldBox = baseBox;
+
+    worldBox.min.x += position.x;
+    worldBox.min.y += position.y;
+    worldBox.min.z += position.z;
+
+    worldBox.max.x += position.x;
+    worldBox.max.y += position.y;
+    worldBox.max.z += position.z;
 }
 
 Steak::~Steak() {
