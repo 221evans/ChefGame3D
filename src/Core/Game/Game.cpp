@@ -4,9 +4,10 @@
 
 #include "Game.h"
 
+#include <forward_list>
 #include <iostream>
 
-Game::Game() : heldSteak(nullptr), heldCarrot(nullptr) {
+Game::Game() : heldSteak(nullptr), heldCarrot(nullptr), isFoodHeld(false) {
 
 }
 
@@ -62,6 +63,7 @@ void Game::HandleSteakUpdate(float deltaTime) {
 
             heldSteak = newSteak;
             heldSteak->isHeld = true;
+            isFoodHeld = true;
         }
     }
 
@@ -70,19 +72,23 @@ void Game::HandleSteakUpdate(float deltaTime) {
         if (heldSteak) {
             heldSteak->isHeld = false;
             heldSteak = nullptr;
+            isFoodHeld = false;
         }
     }
 
     if (heldSteak) {
-        if (CheckCollisionBoxes(player.worldBox, stove.worldBox) && IsKeyPressed(KEY_Q)) {
-            heldSteak->posX = stove.posX;
-            heldSteak->posY = stove.posY + 1.2f;
-            heldSteak->posZ = stove.posZ;
-            heldSteak->isPlaced = true;
-            heldSteak->isHeld = false;
-            heldSteak->isCooking = true;
-            heldSteak = nullptr;
+        if (CheckCollisionBoxes(player.worldBox, stove.worldBox)) {
 
+            if (IsKeyPressed(KEY_Q)) {
+                heldSteak->posX = stove.posX;
+                heldSteak->posY = stove.posY + 1.2f;
+                heldSteak->posZ = stove.posZ;
+                heldSteak->isPlaced = true;
+                heldSteak->isHeld = false;
+                heldSteak->isCooking = true;
+                heldSteak = nullptr;
+                isFoodHeld = false;
+            }
         }
     }
 
@@ -94,6 +100,7 @@ void Game::HandleSteakUpdate(float deltaTime) {
                heldSteak->isHeld = true;
                heldSteak->isCooking = false;
                heldSteak->isPlaced = false;
+               isFoodHeld = true;
            }
        }
    }
@@ -122,6 +129,7 @@ void Game::HandleCarrotUpdate(float deltaTime) {
 
             heldCarrot = newCarrot;
             heldCarrot->isHeld = true;
+            isFoodHeld = true;
         }
     }
 
@@ -129,21 +137,41 @@ void Game::HandleCarrotUpdate(float deltaTime) {
         if (heldCarrot) {
             heldCarrot->isHeld = false;
             heldCarrot = nullptr;
+            isFoodHeld = false;
         }
     }
 
     if (heldCarrot) {
-        if (CheckCollisionBoxes(player.worldBox, stove.worldBox) && IsKeyPressed(KEY_Q)) {
-            heldCarrot->posX = stove.posX;
-            heldCarrot->posY = stove.posY + 1.2f;
-            heldCarrot->posZ = stove.posZ;
-            heldCarrot->isPlaced = true;
-            heldCarrot->isHeld = false;
+        if (CheckCollisionBoxes(player.worldBox, stove.worldBox)) {
+
+            if (IsKeyPressed(KEY_Q)) {
+                heldCarrot->posX = stove.posX;
+                heldCarrot->posY = stove.posY + 1.2f;
+                heldCarrot->posZ = stove.posZ;
+                heldCarrot->isPlaced = true;
+                heldCarrot->isHeld = false;
+                heldCarrot = nullptr;
+                isFoodHeld = false;
+            }
         }
     }
 }
 
 void Game::HandleServingStationUpdate(float deltaTime) {
+    for (auto steak : steaks) {
+
+        if (CheckCollisionBoxes(player.worldBox, servingStation.worldBox)) {
+            if (steak->isHeld && steak->isCooked) {
+                if (IsKeyPressed(KEY_E)) {
+                    std::erase(steaks, heldSteak);
+                    delete heldSteak;
+
+                    heldSteak = nullptr;
+                    isFoodHeld = false;
+                }
+            }
+        }
+    }
 }
 
 

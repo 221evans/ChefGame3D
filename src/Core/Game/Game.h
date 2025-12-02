@@ -16,6 +16,18 @@
 
 class Game {
 public:
+    Game();
+    ~Game();
+    void Draw();
+    void Update(float deltaTime);
+private:
+
+    void HandleSteakUpdate(float deltaTime);
+    void HandleCarrotUpdate(float deltaTime);
+    void HandleServingStationUpdate(float deltaTime);
+
+    bool isFoodHeld;
+
     SteakCrate steakCrate;
     CarrotCrate carrotCrate;
     ServingStation servingStation;
@@ -25,13 +37,6 @@ public:
     Carrot *heldCarrot;
     Player player;
     Stove stove;
-    Game();
-    void Draw();
-    void Update(float deltaTime);
-    void HandleSteakUpdate(float deltaTime);
-    void HandleCarrotUpdate(float deltaTime);
-    void HandleServingStationUpdate(float deltaTime);
-    ~Game();
 };
 
 
