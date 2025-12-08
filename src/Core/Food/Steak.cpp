@@ -52,6 +52,8 @@ void Steak::Update(float deltaTime) {
     if (isBurnt) {
         currentModel = burntModel;
     }
+
+
 }
 
 void Steak::UpdateCooking(float deltaTime) {
@@ -62,8 +64,9 @@ void Steak::UpdateCooking(float deltaTime) {
         isCooked = true;
         std::cout << "Cooked Steak" << std::endl;
     }
-    else if (isCooked && cookingTimer >= timeToBurn) {
+    else if (cookingTimer >= timeToBurn) {
         isBurnt = true;
+        isCooked = false;
         std::cout << "Burnt Steak" << std::endl;
     }
 }
@@ -78,6 +81,15 @@ void Steak::UpdateWorldBox() {
     worldBox.max.x += position.x;
     worldBox.max.y += position.y;
     worldBox.max.z += position.z;
+}
+
+void Steak::HandlePickUp(Player *player) {
+
+    if (isHeld) {
+        posX = player->posX;
+        posY = player->posY + 1.2f;
+        posZ = player->posZ + 1.0f;
+    }
 }
 
 Steak::~Steak() {

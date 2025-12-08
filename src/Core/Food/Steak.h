@@ -6,7 +6,7 @@
 #define CHEFGAME3D_STEAK_H
 #include "Food.h"
 #include "raylib.h"
-
+#include  "../Player.h"
 class Steak : public Food{
 public:
     Steak();
@@ -25,6 +25,7 @@ public:
     void Update(float deltaTime) override;
     void UpdateCooking(float deltaTime) override;
     void UpdateWorldBox() override;
+    void HandlePickUp(Player* player);
     ~Steak() override;
 };
 

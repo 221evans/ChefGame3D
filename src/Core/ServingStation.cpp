@@ -23,7 +23,12 @@ void ServingStation::Draw() const {
 
 void ServingStation::Update() {
     position = {posX, posY,posZ};
+
+
+
     UpdateWorldBox();
+
+
 }
 
 void ServingStation::UpdateWorldBox() {

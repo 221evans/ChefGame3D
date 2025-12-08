@@ -5,6 +5,7 @@
 #ifndef CHEFGAME3D_SERVINGSTATION_H
 #define CHEFGAME3D_SERVINGSTATION_H
 #include "raylib.h"
+#include "Food/Steak.h"
 
 
 class ServingStation {
@@ -21,6 +22,7 @@ public:
     BoundingBox baseBox;
     BoundingBox worldBox;
     Model model;
+    Steak* steak;
 
     ~ServingStation();
 

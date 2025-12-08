@@ -27,6 +27,7 @@ private:
     void HandleServingStationUpdate(float deltaTime);
 
     bool isFoodHeld;
+    int score;
 
     SteakCrate steakCrate;
     CarrotCrate carrotCrate;

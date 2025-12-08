@@ -7,9 +7,7 @@
 #include <forward_list>
 #include <iostream>
 
-Game::Game() : heldSteak(nullptr), heldCarrot(nullptr), isFoodHeld(false) {
-
-}
+Game::Game() : isFoodHeld(false), score(0), heldSteak(nullptr), heldCarrot(nullptr) {}
 
 
 void Game::Draw() {
@@ -21,7 +19,6 @@ void Game::Draw() {
     for (auto* carrot : carrots) {
         carrot->Draw();
     }
-
     steakCrate.Draw();
     carrotCrate.Draw();
     player.Draw();
@@ -30,14 +27,14 @@ void Game::Draw() {
 }
 
 void Game::Update(float deltaTime) {
-
-
     player.Update(deltaTime);
     servingStation.Update();
     stove.Update();
     HandleSteakUpdate(deltaTime);
     HandleCarrotUpdate(deltaTime);
     HandleServingStationUpdate(deltaTime);
+
+    DrawText(("Score: " + std::to_string(score)).c_str(), 10, 10, 20, RED);
 }
 
 
@@ -48,19 +45,14 @@ void Game::HandleSteakUpdate(float deltaTime) {
     for (auto steak : steaks) {
         steak->Update(deltaTime);
 
-        if (steak->isHeld) {
-            steak->posX = player.posX;
-            steak->posY = player.posY + 1.2f;
-            steak->posZ = player.posZ + 1.0f;
-        }
+        steak->HandlePickUp(&player);
     }
 
     // Spawn a new steak from the crate
-    if (CheckCollisionBoxes(steakCrate.worldBox, player.worldBox)) {
+    if (CheckCollisionBoxes(steakCrate.worldBox, player.worldBox) && !isFoodHeld) {
         if (IsKeyPressed(KEY_E)) {
             auto* newSteak = new Steak();
             steaks.push_back(newSteak);
-
             heldSteak = newSteak;
             heldSteak->isHeld = true;
             isFoodHeld = true;
@@ -161,13 +153,33 @@ void Game::HandleServingStationUpdate(float deltaTime) {
     for (auto steak : steaks) {
 
         if (CheckCollisionBoxes(player.worldBox, servingStation.worldBox)) {
-            if (steak->isHeld && steak->isCooked) {
+            if (steak->isHeld && steak->isCooked && !steak->isBurnt) {
                 if (IsKeyPressed(KEY_E)) {
                     std::erase(steaks, heldSteak);
                     delete heldSteak;
-
                     heldSteak = nullptr;
                     isFoodHeld = false;
+                    score++;
+                }
+            }
+
+            if (steak->isBurnt) {
+                DrawText("Can't Serve burnt food! ", 200,10,20, RED);
+            }
+
+        }
+    }
+
+    // just for debugging purposes at the moment. Don't think carrots will be served directly
+    for (auto carrot : carrots) {
+        if (CheckCollisionBoxes(player.worldBox, servingStation.worldBox)) {
+            if (carrot->isHeld) {
+                if (IsKeyPressed(KEY_E)) {
+                    std::erase(carrots, heldCarrot);
+                    delete heldCarrot;
+                    heldCarrot = nullptr;
+                    isFoodHeld = false;
+                    score ++;
                 }
             }
         }
